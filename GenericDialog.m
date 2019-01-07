@@ -146,7 +146,7 @@ methods
     end
     
     function setSize(this, newSize, unit)
-        if nargin < 3
+        if ~isa('unit', 'var')
             unit = 'pixels';
         end
         set(this.handles.figure, 'units', unit);
@@ -203,7 +203,7 @@ methods
             'Parent', hLine, ...
             'String', text, ...
             'BackgroundColor', bgColor);
-        if isa('cb', 'var')
+        if exist('cb', 'var')
             set(h, 'Callback', cb);
         end
         
@@ -243,7 +243,7 @@ methods
             'Parent', hLine, ...
             'String', text, ...
             'BackgroundColor', bgColor);
-        if isa('cb', 'var')
+        if exist('cb', 'var')
             set(h, 'Callback', cb);
             set(h, 'KeyPressFcn', cb);
         end
@@ -274,7 +274,12 @@ methods
         % create horizontal box
         hLine = uix.HBox('Parent', this.handles.mainPanel, ...
             'Spacing', 5, 'Padding', 5);
-      
+
+        % use default value if not specified
+        if ~exist('checked', 'var')
+            checked = false;
+        end
+
         % creates the new control
         %         bgColor = getWidgetBackgroundColor(this);
 %         bgColor = [1 1 1];
@@ -283,7 +288,7 @@ methods
             'Parent', hLine, ...
             'String', label, ...
             'Value', checked);
-        if isa('cb', 'var')
+        if exist('cb', 'var')
             set(h, 'Callback', cb);
         end
         
@@ -304,7 +309,7 @@ methods
         % usage:
         %   addChoice(GD, LABEL, CHOICES, INITIALVALUE);
         
-        
+        % create horizontal box
         hLine = uix.HBox('Parent', this.handles.mainPanel, ...
             'Spacing', 5, 'Padding', 5);
         
@@ -345,7 +350,6 @@ methods
         set(this.handles.mainPanel, 'Heights', this.boxSizes);
     end
     
-   
 end % end methods
 
 

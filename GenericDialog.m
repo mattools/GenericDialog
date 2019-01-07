@@ -137,7 +137,50 @@ methods (Access = private)
      end
 end
 
-%% Methods
+%% Generic Methods
+methods
+    function showDialog(this)
+        % makes the dialog visible, and waits for user validation
+        setVisible(this, true);
+        waitForUser(this);
+    end
+    
+    function setSize(this, newSize, unit)
+        if nargin < 3
+            unit = 'pixels';
+        end
+        set(this.handles.figure, 'units', unit);
+        pos = get(this.handles.figure, 'Position');
+        pos(3:4) = newSize;
+        set(this.handles.figure, 'Position', pos);
+    end
+    
+    function setVisible(this, value)
+        if value
+            set(this.handles.figure, 'Visible', 'on');
+            set(this.handles.figure, 'WindowStyle', 'modal');
+        else
+            set(this.handles.figure, 'Visible', 'off');
+        end
+    end
+    
+    function b = wasOked(this)
+        b = strcmp(this.closingButton, 'ok');
+    end
+    
+    function b = wasCanceled(this)
+        b = strcmp(this.closingButton, 'cancel');
+    end
+    
+    function closeFigure(this)
+        % close the current figure
+        if ~isempty(this.handles.figure)
+            close(this.handles.figure);
+        end
+    end
+end
+
+%% Management of choice items
 methods
     function [h, ht] = addTextField(this, label, text, cb)
         % Add a text field to this diaolg
@@ -377,44 +420,15 @@ methods
         set(this.handles.figure, 'Visible', 'off');
     end
     
-    function showDialog(this)
-        % makes the dialog visible, and waits for user validation
-        setVisible(this, true);
-        waitForUser(this);
-    end
-    
-    function setVisible(this, value)
-        if value
-            set(this.handles.figure, 'Visible', 'on');
-            set(this.handles.figure, 'WindowStyle', 'modal');
-        else
-            set(this.handles.figure, 'Visible', 'off');
-        end
-    end
-    
-    function b = wasOked(this)
-        b = strcmp(this.closingButton, 'ok');
-    end
-    
-    function b = wasCanceled(this)
-        b = strcmp(this.closingButton, 'cancel');
-    end
-    
     function button = waitForUser(this)
         waitfor(this.handles.figure, 'Visible', 'off');
         button = this.closingButton;
     end
-    
-    function closeFigure(this)
-        % close the current figure
-        if ~isempty(this.handles.figure);
-            close(this.handles.figure);
-        end
-    end
-    
 end
 
 end % end classdef
+
+%% Utility functions
 
 function ht = addLabel(parent, label)
 % add a label to a widget, with predefined settings

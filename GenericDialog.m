@@ -317,7 +317,10 @@ methods
         ht = addLabel(hLine, label);
         
         % set initial value as numeric if not the case
-        if ischar(initialValue)
+        if ~exist('initialValue', 'var')
+            initialValue = 1;
+            
+        elseif ischar(initialValue)
             ind = find(strcmp(choiceLabels, initialValue), 1);
             if isempty(ind)
                 error(['Could not find initial value [' initialValue ...

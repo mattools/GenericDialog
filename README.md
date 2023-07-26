@@ -33,3 +33,5 @@ The design is based on ImageJ's "GenericDialog" class, and mimics its functional
         imshow(img);
         title(name);
     end
+
+![Sample dialog as created by "GenericDialog"](https://github.com/mattools/GenericDialog/blob/master/images/demo_GenericDialog_view.png)

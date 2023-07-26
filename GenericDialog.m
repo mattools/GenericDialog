@@ -26,19 +26,18 @@ classdef GenericDialog < handle
 %     type = getNextString(gd);
 %     display = getNextBoolean(gd);
 %
-%     % Creates new image, and displays if requested
-%     img = Image.create([width height], type);
-%     img.name = name;
+%     img = zeros([height width], type);
 %     if display
-%         show(img); title(name);
+%         imshow(img);
+%         title(name);
 %     end
 %
 %   See also
-%
+%     inputdlg, figure, uix.VBox
 
 % ------
 % Author: David Legland
-% e-mail: david.legland@inra.fr
+% e-mail: david.legland@inrae.fr
 % Created: 2014-04-18,    using Matlab 7.9.0.529 (R2009b)
 % Copyright 2014 INRA - Cepia Software Platform.
 

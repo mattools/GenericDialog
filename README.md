@@ -1,6 +1,9 @@
 # GenericDialog
 A simple generic dialog for Matlab, to quickly prompt a set of parameters. 
-The design is based on ImageJ's "GenericDialog" class, and mimics its functionalities.
+The design is based on the "GenericDialog" class from the ImageJ software, and mimics its functionalities.
+
+The implementation is based on the [GUILayout Toolbox](https://fr.mathworks.com/matlabcentral/fileexchange/47982-gui-layout-toolbox),
+making the dialog easily resizable.
 
 ## Example
 
